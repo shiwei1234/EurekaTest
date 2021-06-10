@@ -15,14 +15,16 @@ public class ProviderController {
 
     @Autowired
     private DiscoveryClient discoveryClient;
-
+    @Autowired
+    EurekaService service;
+    
     @RequestMapping(value = "/hello")
     public String hello(){
         List<String> services = discoveryClient.getServices();
         for(String s : services){
             log.info(s);
         }
-        return "hello xxxxxxx cloud!";
+        return service.getInfo();
     }
 
     @RequestMapping(value = "/nice")
