@@ -3,12 +3,29 @@ server:
 feign: 
   hystrix:
   enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds:  120000
+          semaphore:
+            maxConcurrentRequests: 1000
+      circuitBreaker:
+        requestVolumeThreshold: 1000
+        sleepWindowInMilliseconds: 5000
+ #设置feign的核心线程池的数量
+  threadpool:
+    default:  
+      coreSize: 50
 eureka:
   instance:
     preferIpAddress: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:3000/eureka  ## 注册到 eureka 
+      defaultZone: http://localhost:3000/eureka   ##注册到 eureka 
 spring:
   application:
-    name: 服务提供者  ## 应用程序名称，后面会在消费者中用到
+    name: single-provider  ## 应用程序名称，后面会在消费者中用到

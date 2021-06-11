@@ -8,4 +8,4 @@ eureka:
       defaultZone: http://localhost:3000/eureka  ## 注册到 eureka 
 spring:
   application:
-    name: 服务消费者  
+    name: single-coustomer  
